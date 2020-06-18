@@ -1,0 +1,10 @@
+<div class="container">
+    <button  mat-raised-button color="accent" (click)="goBack()">Back</button>
+    <h1>Task details</h1>
+    <h3>Task name: {{selectedTask.name}}</h3>
+    <h3>Task description: {{selectedTask.description}}</h3>
+    <div class="controls">
+        <button mat-raised-button color="primary" (click)="openEdit(selectedTask)">Edit</button>
+        <button mat-raised-button color="warn" (click)="onDelete(selectedTask.$key)">Delete</button>
+    </div>
+</div>

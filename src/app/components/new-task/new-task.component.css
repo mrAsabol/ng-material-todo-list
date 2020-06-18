@@ -1,0 +1,22 @@
+form {
+    text-align: center;
+    padding: 20px;
+    margin: 0 auto;
+    width: 80%;
+    height: 80%;
+}
+
+.form-header {
+    position: relative;
+    display: block;
+    left: 50%;
+    transform: translate(-50%);
+}
+
+.example-full-width {
+    width: 60%;
+}
+
+.button-row button {
+    margin: 5px;
+}
