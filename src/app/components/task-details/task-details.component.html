@@ -1,5 +1,4 @@
-<div class="container">
-    <button  mat-raised-button color="accent" (click)="goBack()">Back</button>
+<!-- <div class="container">
     <h1>Task details</h1>
     <h3>Task name: {{selectedTask.name}}</h3>
     <h3>Task description: {{selectedTask.description}}</h3>
@@ -7,4 +6,21 @@
         <button mat-raised-button color="primary" (click)="openEdit(selectedTask)">Edit</button>
         <button mat-raised-button color="warn" (click)="onDelete(selectedTask.$key)">Delete</button>
     </div>
+</div> -->
+<button class="backBtn" mat-raised-button color="primary" (click)="goBack()">Back</button>
+<div class="container">
+    <mat-card >
+        <mat-card-header>
+            <mat-card-title>Task details</mat-card-title>
+        </mat-card-header>
+        <hr>
+        <mat-card-content>
+            <h4>Task name: {{selectedTask.name}}</h4>
+            <h4>Task description: {{selectedTask.description}}</h4>
+        </mat-card-content>
+        <mat-card-actions class="controls">
+            <button mat-raised-button color="primary" (click)="openEdit(selectedTask)">Edit</button>
+            <button mat-raised-button color="warn" (click)="onDelete(selectedTask.$key)">Delete</button>
+        </mat-card-actions>
+    </mat-card>
 </div>

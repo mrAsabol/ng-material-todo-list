@@ -1,7 +1,17 @@
 .container {
-    padding: 10px;
+    margin: auto;
+    margin-top: 15%;
+    width: 45%;
 }
 
-.controls button {
+.backBtn {
     margin: 5px;
+}
+
+mat-card {
+    text-align: center;
+}
+
+mat-card-title {
+    text-align: center;
 }
