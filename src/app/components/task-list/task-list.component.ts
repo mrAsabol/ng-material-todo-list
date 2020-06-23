@@ -34,7 +34,6 @@ export class TaskListComponent implements OnInit {
             ...item.payload.val()
           };
         });
-        console.log("x");
         this.listData = new MatTableDataSource(arr);
         this.listData.sort = this.sort;
         this.listData.paginator = this.paginator;

@@ -24,7 +24,7 @@ export class TaskServiceService {
       name: '',
       description: '',
       created: null
-    })
+    });
   }
 
   getTasks() {
