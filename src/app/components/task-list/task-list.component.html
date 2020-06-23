@@ -25,7 +25,7 @@
   
     <ng-container matColumnDef="created">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Created </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.created | date }} </mat-cell>
+      <mat-cell *matCellDef="let element"> {{element.created | toDateTime }} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="actions">

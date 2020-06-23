@@ -28,12 +28,13 @@ export class TaskListComponent implements OnInit {
   ngOnInit(): void {
     this.service.getTasks().subscribe(
       list => {
-        let arr = list.map(item => {
+        const arr = list.map(item => {
           return {
             $key: item.key,
             ...item.payload.val()
           };
         });
+        console.log("x");
         this.listData = new MatTableDataSource(arr);
         this.listData.sort = this.sort;
         this.listData.paginator = this.paginator;

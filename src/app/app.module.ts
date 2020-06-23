@@ -24,13 +24,15 @@ import {MatCardModule} from '@angular/material/card';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { environment } from '../environments/environment';
+import { ToDateTimePipe } from './to-date-time.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     TaskListComponent,
     TaskDetailsComponent,
-    NewTaskComponent
+    NewTaskComponent,
+    ToDateTimePipe
   ],
   imports: [
     AppRoutingModule,
