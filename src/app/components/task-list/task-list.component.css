@@ -6,3 +6,19 @@
 button {
     margin-left: 5px;
 }
+
+.deleteAll {
+    margin-top: 25px;
+    margin-left: 15px;
+    font-size: 12px;
+}
+
+.toggleGroup {
+    margin-left: 20px;
+}
+
+.toggleBtn {
+    background-color: #1d1d1d;
+    color: #FFF; 
+    font-size: 10px;
+}

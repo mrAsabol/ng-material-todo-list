@@ -15,7 +15,8 @@ export class TaskServiceService {
     $key: new FormControl(null),
     name: new FormControl(''),
     description: new FormControl(''),
-    created: new FormControl('')
+    created: new FormControl(''),
+    isCompleted: new FormControl(false)
   });
 
   initFormState() {
@@ -23,7 +24,8 @@ export class TaskServiceService {
       $key: null,
       name: '',
       description: '',
-      created: null
+      created: null,
+      isCompleted: false
     });
   }
 
@@ -36,7 +38,8 @@ export class TaskServiceService {
     this.taskList.push({
       name: task.name,
       description: task.description,
-      created: Date.now()
+      created: Date.now(),
+      isCompleted: task.isCompleted
     });
   }
 
@@ -44,7 +47,8 @@ export class TaskServiceService {
     this.taskList.update(task.$key, {
       name: task.name,
       description: task.description,
-      created: Date.now()
+      created: Date.now(),
+      isCompleted: task.isCompleted
     });
   }
 

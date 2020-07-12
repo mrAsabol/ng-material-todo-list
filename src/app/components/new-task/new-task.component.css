@@ -20,3 +20,7 @@ form {
 .button-row button {
     margin: 5px;
 }
+
+label {
+    margin-right: 15px;
+}

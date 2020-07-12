@@ -1,12 +1,34 @@
 <div class="search-div">
-    <button mat-raised-button color="primary" (click)="onCreate()">Add</button>
+    <button mat-raised-button color="primary" (click)="onCreate()">Create Task</button>
     <mat-form-field class="search-form-field">
         <input matInput [(ngModel)]="searchKey" placeholder="Search..." autocomplete="off" (keyup)="applyFilter()">
         <button color="warn" mat-button matSuffix (click)="onSearchClear()">X</button>
     </mat-form-field>
+    <mat-button-toggle-group class="toggleGroup" name="filterCompletition" aria-label="filter Completition" value="All">
+      <mat-button-toggle class="toggleBtn" value="All" #all id="all" (click)="completionFilter(all)">All</mat-button-toggle>
+      <mat-button-toggle class="toggleBtn" #completed id="completed" (click)="completionFilter(completed)">Completed</mat-button-toggle>
+      <mat-button-toggle class="toggleBtn" #notCompleted id="notCompleted" (click)="completionFilter(notCompleted)">Not Completed</mat-button-toggle>
+    </mat-button-toggle-group>
 </div>
 <div class="mat-elevation-z8">
 <mat-table [dataSource]="listData" matSort>
+
+  <ng-container matColumnDef="select">
+    <mat-header-cell *matHeaderCellDef mat-header>
+      <mat-checkbox (change)="$event ? masterToggle() : null"
+                    [checked]="selection.hasValue() && isAllSelected()"
+                    [indeterminate]="selection.hasValue() && !isAllSelected()"
+                    [aria-label]="checkboxLabel()">
+      </mat-checkbox> 
+    </mat-header-cell>
+    <mat-cell *matCellDef="let row"> 
+      <mat-checkbox (click)="$event.stopPropagation()"
+      (change)="$event ? selection.toggle(row) : null"
+      [checked]="selection.isSelected(row)"
+      [aria-label]="checkboxLabel(row)">
+      </mat-checkbox> 
+    </mat-cell>
+  </ng-container>
   
     <ng-container matColumnDef="key">
       <mat-header-cell *matHeaderCellDef mat-sort-header> ID </mat-header-cell>
@@ -28,10 +50,17 @@
       <mat-cell *matCellDef="let element"> {{element.created | toDateTime }} </mat-cell>
     </ng-container>
 
+    <ng-container matColumnDef="isCompleted">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Completed </mat-header-cell>
+      <mat-cell *matCellDef="let element" >
+        <input type="checkbox" [(ngModel)]="element.isCompleted" (change)="taskStateChange(element)">
+      </mat-cell>
+    </ng-container>
+
     <ng-container matColumnDef="actions">
         <mat-header-cell *matHeaderCellDef></mat-header-cell>
         <mat-cell *matCellDef="let row">
-            <button mat-icon-button color="accent" (click)="openDetails(row.$key)">Details</button>
+            <button mat-icon-button color="accent" (click)="openDetails(row.$key)">View</button>
             <button mat-icon-button color="primary" (click)="onEdit(row)">Edit</button>
             <button mat-icon-button color="warn" (click)="onDelete(row.$key)">Delete</button>
         </mat-cell>
@@ -40,5 +69,6 @@
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
   </mat-table>
+  <button mat-raised-button color="warn" (click)="onDeleteSelected()" *ngIf="this.selection.selected.length !== 0" class="deleteAll">Delete Selected</button>
   <mat-paginator [pageSizeOptions]="[5, 10, 25]" [pageSize]="5"></mat-paginator>
 </div>

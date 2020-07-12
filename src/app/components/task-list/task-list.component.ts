@@ -6,6 +6,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatDialogConfig, MatDialog } from '@angular/material/dialog';
 import { NewTaskComponent } from '../new-task/new-task.component';
 import { Router } from '@angular/router';
+import {SelectionModel} from '@angular/cdk/collections';
 
 @Component({
   selector: 'app-task-list',
@@ -13,6 +14,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./task-list.component.css']
 })
 export class TaskListComponent implements OnInit {
+  original: any[];
 
   constructor(private service: TaskServiceService, private dialog: MatDialog, private router: Router) { }
 
@@ -23,7 +25,8 @@ export class TaskListComponent implements OnInit {
 
 
   listData: MatTableDataSource<any>;
-  displayedColumns: string[] = ['key', 'name', 'description', 'created', 'actions'];
+  displayedColumns: string[] = ['select', 'key', 'name', 'description', 'created', 'isCompleted', 'actions'];
+  selection = new SelectionModel<any>(true, []);
 
   ngOnInit(): void {
     this.service.getTasks().subscribe(
@@ -37,7 +40,29 @@ export class TaskListComponent implements OnInit {
         this.listData = new MatTableDataSource(arr);
         this.listData.sort = this.sort;
         this.listData.paginator = this.paginator;
+        this.original = this.listData.data;
       });
+  }
+
+  isAllSelected() {
+    const numSelected = this.selection.selected.length;
+    const numRows = this.listData.data.length;
+    return numSelected === numRows;
+  }
+
+  /** Selects all rows if they are not all selected; otherwise clear selection. */
+  masterToggle() {
+    this.isAllSelected() ?
+        this.selection.clear() :
+        this.listData.data.forEach(row => this.selection.select(row));
+  }
+
+  /** The label for the checkbox on the passed row */
+  checkboxLabel(row?: any): string {
+    if (!row) {
+      return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
+    }
+    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`;
   }
 
   onSearchClear() {
@@ -64,6 +89,15 @@ export class TaskListComponent implements OnInit {
     }
   }
 
+  onDeleteSelected(){
+    if (confirm('Are you sure you want to delete these items?')){
+      for (const iterator of this.selection.selected) {
+        const key = iterator.$key;
+        this.service.deleteTask(key);
+      }
+    }
+  }
+
   openDetails($key) {
     this.router.navigate(['/task-details', $key]);
   }
@@ -77,4 +111,23 @@ export class TaskListComponent implements OnInit {
     this.dialog.open(NewTaskComponent, dialogConfig);
   }
 
+  taskStateChange(row) {
+    this.service.populateForm(row);
+    this.service.updateTask(this.service.form.value);
+  }
+
+  completionFilter(button) {
+    let tempFiltered = [];
+    if (button.id === 'completed') {
+      this.listData.data = this.original;
+      tempFiltered = this.listData.data.filter((x) => x.isCompleted === true);
+      this.listData.data = tempFiltered;
+    } else if (button.id === 'notCompleted') {
+      this.listData.data = this.original;
+      tempFiltered = this.listData.data.filter((x) => x.isCompleted === false);
+      this.listData.data = tempFiltered;
+    } else if (button.id === 'all') {
+      this.listData.data = this.original;
+    }
+  }
 }

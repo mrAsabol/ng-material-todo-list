@@ -17,7 +17,9 @@ export class NewTaskComponent implements OnInit {
 
 
   onCancel() {
-    this.onClose();
+    if (confirm('All unsaved changes will be lost')){
+      this.onClose();
+    }
   }
 
   onSubmit() {

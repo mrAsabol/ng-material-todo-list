@@ -20,6 +20,9 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatCardModule} from '@angular/material/card';
+import {MatSelectModule} from '@angular/material/select';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
+
 
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
@@ -48,10 +51,12 @@ import { ToDateTimePipe } from './pipes/to-date-time.pipe';
     AngularFireDatabaseModule,
     MatTableModule,
     MatSortModule,
+    MatSelectModule,
     MatPaginatorModule,
     MatCheckboxModule,
     MatDialogModule,
     MatToolbarModule,
+    MatButtonToggleModule,
     MatCardModule
   ],
   providers: [
