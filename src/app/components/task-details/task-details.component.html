@@ -17,7 +17,7 @@
         <mat-card-content>
             <h4>Task name: {{selectedTask.name}}</h4>
             <h4>Task description: {{selectedTask.description}}</h4>
-            <h4>Task completed: {{selectedTask.isCompleted}}</h4>
+            <h4>{{selectedTask.isCompleted?"Task: COMPLETED":"Task: NOT COMPLETED"}}</h4>
         </mat-card-content>
         <mat-card-actions class="controls">
             <button mat-raised-button color="primary" (click)="openEdit(selectedTask)">Edit</button>

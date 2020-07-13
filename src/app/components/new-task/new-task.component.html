@@ -12,10 +12,10 @@
             <textarea rows="2" formControlName="description" matInput placeholder="Description..."></textarea>
         </mat-form-field>
         <br>
-        <section *ngIf="service.form.controls['$key'].value">
-            <label for="isCompleted">Is task completed?</label>
-            <mat-checkbox type="checkbox" formControlName="isCompleted"></mat-checkbox>
-        </section>
+        <div *ngIf="service.form.controls['$key'].value" class="editCheckbox">
+            <label for="isCompleted" class="checkboxLabel">Set task as completed</label>
+            <mat-checkbox type="checkbox" color="primary" formControlName="isCompleted"></mat-checkbox>
+        </div>
         <input type="hidden" formControlName="created">
         <div class="button-row">
             <button mat-raised-button color="primary" type="submit">Submit</button>

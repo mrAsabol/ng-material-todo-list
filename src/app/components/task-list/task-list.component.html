@@ -4,7 +4,8 @@
         <input matInput [(ngModel)]="searchKey" placeholder="Search..." autocomplete="off" (keyup)="applyFilter()">
         <button color="warn" mat-button matSuffix (click)="onSearchClear()">X</button>
     </mat-form-field>
-    <mat-button-toggle-group class="toggleGroup" name="filterCompletition" aria-label="filter Completition" value="All">
+    <p class="toggleGroupTitle">Filter tasks by completition:</p>
+    <mat-button-toggle-group  class="toggleGroup" name="filterCompletition" aria-label="filter Completition" value="All">
       <mat-button-toggle class="toggleBtn" value="All" #all id="all" (click)="completionFilter(all)">All</mat-button-toggle>
       <mat-button-toggle class="toggleBtn" #completed id="completed" (click)="completionFilter(completed)">Completed</mat-button-toggle>
       <mat-button-toggle class="toggleBtn" #notCompleted id="notCompleted" (click)="completionFilter(notCompleted)">Not Completed</mat-button-toggle>
@@ -18,14 +19,16 @@
       <mat-checkbox (change)="$event ? masterToggle() : null"
                     [checked]="selection.hasValue() && isAllSelected()"
                     [indeterminate]="selection.hasValue() && !isAllSelected()"
-                    [aria-label]="checkboxLabel()">
+                    [aria-label]="checkboxLabel()"
+                    color="warn">
       </mat-checkbox> 
     </mat-header-cell>
     <mat-cell *matCellDef="let row"> 
       <mat-checkbox (click)="$event.stopPropagation()"
       (change)="$event ? selection.toggle(row) : null"
       [checked]="selection.isSelected(row)"
-      [aria-label]="checkboxLabel(row)">
+      [aria-label]="checkboxLabel(row)"
+      color="warn">
       </mat-checkbox> 
     </mat-cell>
   </ng-container>

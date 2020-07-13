@@ -24,3 +24,12 @@ form {
 label {
     margin-right: 15px;
 }
+
+.editCheckbox {
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.checkboxLabel {
+    font-weight: 500;
+}
